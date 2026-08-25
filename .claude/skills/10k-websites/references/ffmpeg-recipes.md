@@ -18,7 +18,7 @@ ffmpeg -i raw.mp4 -c:v libx264 -crf 18 -preset slow -g 8 -keyint_min 8 -pix_fmt 
 - `-crf 18`: visually clean quality.
 - `-movflags +faststart`: the metadata moves to the front so playback and Blob use start immediately.
 - `-an`: strip audio; a scrub video never needs it.
-- Target roughly 4 to 8 MB for a 6-second 1080p clip. If it lands far above that, raise `-crf` toward 20 to 22 and re-check quality.
+- Target roughly 2 to 5 MB for a 6-second 720p clip (Kling's current generation cap; scale the range up if a future source is higher-resolution). If it lands far above that, raise `-crf` toward 20 to 22 and re-check quality.
 
 ### The compression fork by footage type
 
@@ -71,13 +71,13 @@ ffmpeg -sseof -0.1 -i raw.mp4 -update 1 -frames:v 1 -q:v 2 review/frame-end.jpg
 
 ## The chaining frame grab (full quality, never review quality)
 
-The frame that becomes the next segment's `start_image` must be a full-quality PNG. The `-q:v 2` review jpgs above are for your eyes only; chaining from one bakes compression into every later segment:
+The frame that becomes the next segment's `first_image` must be a full-quality PNG. The `-q:v 2` review jpgs above are for your eyes only; chaining from one bakes compression into every later segment:
 
 ```
 ffmpeg -sseof -0.1 -i seg.mp4 -update 1 -frames:v 1 -q:v 1 final.png
 ```
 
-This PNG is what you upload via `media_upload` and `media_confirm` (the bridge is spelled out in `prompt-laws.md`), and the confirmed media id becomes the next segment's `start_image`.
+This PNG is what you upload via `file_upload` (the bridge is spelled out in `prompt-laws.md`), and the returned URL becomes the next segment's `first_image`.
 
 ## Segment concat (Tier 2 chained journeys)
 

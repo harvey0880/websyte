@@ -30,7 +30,7 @@ Design every shot by these laws BEFORE generating. They predict which concepts l
 
 ## Prompt construction
 
-### Start frame template (image, 16:9, 2k, about 2 credits)
+### Start frame template (image, via Kling `text_to_image` or `image_to_image`, 16:9, 2k)
 
 Compose the image as frame one of the motion: the subject positioned so the journey can begin.
 
@@ -49,9 +49,9 @@ The same trap has a symmetry case. When the composition needs a centered subject
 
 If the user supplied a real product photo, that photo can be the start frame instead. Inspect it for resolution and composition first, and confirm the negative space works for the layout.
 
-When the subject is a real person (the owner, the chef, the maker), their photo rides in as a reference image instead of a start frame: generate the start frame with a model that takes character references, restate their recognizable details in the prompt (hair, glasses, clothing), and inspect the result for likeness the same way you inspect for trademarks. Likeness is a brand-coherence detail; a near-miss face fails the whole site. And one hard rule before any face is generated: only use a photo of the user themselves or of a person who has agreed to appear on the site. If the photo is of anyone else, stop and ask before generating.
+When the subject is a real person (the owner, the chef, the maker), their photo rides in as a Kling Element instead of a plain reference: upload their photo(s) with `file_upload`, then call `element_create` with the uploaded URL as `resource.cover` (plus up to 3 more as `secondary` if available) and the tag `Characters`. Pass the returned element id via the `elements` argument on `image_to_image` (any model) or `image_to_video` (only `kling-video-o1`, `kling-video-v3_0`, and `kling-video-v3_0_omni` support subject elements; the others do not). Restate their recognizable details in the prompt too (hair, glasses, clothing), and inspect the result for likeness the same way you inspect for trademarks. Likeness is a brand-coherence detail; a near-miss face fails the whole site. And one hard rule before any face is generated: only use a photo of the user themselves or of a person who has agreed to appear on the site. If the photo is of anyone else, stop and ask before generating.
 
-### Video template (image-to-video, 1080p, 6 seconds, standard mode, no audio; about 54 credits on the top-priced model, far less on a mid-priced one)
+### Video template (image-to-video via `kling-video-v3_0_turbo` by default, 720p — Kling's current cap for image-to-video and text-to-video, not 1080p — 6 seconds, audio disabled; no free price preflight, so check `query_membership_and_credits` before and after)
 
 ```
 One continuous shot, no cuts. [SUBJECT] [VERB OF THE JOURNEY: pours, descends,
@@ -66,7 +66,7 @@ where, what the light does, why it feels arrived]. No text or lettering
 anywhere.
 ```
 
-Generate at 1080p, not 4K. The web version gets re-encoded and compressed anyway, and 4K only multiplies the cost.
+Generate at 720p, Kling's current ceiling for `image_to_video` and `text_to_video` (1080p and 4K are not offered on those tools' argument specs). The web version gets re-encoded and compressed anyway, so shoot at the model's native resolution and let ffmpeg's scrub encode do the rest.
 
 ## The chaining recipe (Tier 2: a 15 to 20 second scroll journey)
 
@@ -74,7 +74,10 @@ One long journey built from 6-second segments that join invisibly:
 
 1. Generate segment 1 from the start frame. Run the full inspection and ⛔ VIDEO GATE on it alone.
 2. Extract the final frame of the approved segment as a full-quality PNG with ffmpeg (exact command in `ffmpeg-recipes.md`; review-grade jpgs are not good enough to chain from).
-3. Upload that PNG to Higgsfield. This is the bridge from a local file to a `start_image`, and it has three steps: call `media_upload`, which returns a presigned PUT URL (a temporary upload address). Then PUT the raw PNG bytes to that URL, for example `curl -X PUT --upload-file final.png "<presigned-url>"`. Then call `media_confirm` to register the upload. The confirmed media id is what you pass as `start_image` for the next segment's image-to-video call.
+3. Upload that PNG to Kling. This is the bridge from a local file to a `first_image`, and it is two steps: call `file_upload` with the file's name, content type, and size, which returns a one-time upload ticket and an `upload_url`. Then POST the raw PNG bytes to that URL as `multipart/form-data` with two fields, `ticket` (the ticket string) and `file` (the PNG bytes) — for example `curl -F "ticket=<ticket>" -F "file=@final.png" "<upload_url>"`. The response contains the file's URL, which is what you pass as `first_image` (or `image_1`, `image_2`, etc. on the multi-image models) for the next segment's `image_to_video` call. The ticket is single-use and expires, so upload just before the call that needs it.
+
+**Kling's native alternative for a single link:** `kling-video-v2_5`, `kling-video-v2_6`, and `kling-video-v3_0` accept an optional `tail_image` alongside `first_image`, so one call can target both the segment's start and its composed end frame directly. That is worth using when the resting frame is already fully designed. For a full multi-segment journey, the segment-by-segment approach below is still the reliable path, because it lets each link get its own gate and its own cheap re-roll before the next one commits to it.
+
 4. Write the next segment's prompt so the motion CONTINUES: same heading, same speed, same lighting, picking up exactly where the previous segment rested. The join is invisible only if the motion vector never breaks. Special case that comes up often: when a segment ends in a near-empty or near-black frame (say, a single point of light), the next segment's prompt must explicitly describe what grows out of that frame. Do that and the join disappears.
 5. Gate each segment separately. A rejected segment is a cheap single re-roll, not a redo of the whole journey.
 6. Join the approved segments into one file with the single-encode concat in `ffmpeg-recipes.md`: feed the RAW segments into one filter and encode exactly once with the scrub settings. One encode means the joins cannot mismatch. The fallback, when raws are unavailable, is to encode every segment with IDENTICAL settings and join with the concat demuxer; identical parameters are what keep that path invisible at the joins, and mismatched ones glitch at every join.
@@ -86,14 +89,18 @@ Only the final segment needs the composed resting ending (law 4). Middle segment
 
 **Which worlds chain reliably:** abstract worlds (pure light, particles, atmosphere) are the chaining reliability champions. With no anatomy for a continuation prompt to get wrong, a three-segment chain can land first-try on every segment. When a Tier 2 concept is on the fence, this is a strong reason to go abstract.
 
-## Declining presets
+## Writing the literal prompt
 
-The generator sometimes pattern-matches your prompt and offers a house preset instead of generating your shot. Decline it and retry with your literal prompt. Your designed shot obeys the laws and composes for your layout; a preset does neither.
+Always submit the full designed prompt built from the templates above, not a shorthand version. If a model's own response suggests a rewritten or simplified prompt, check it still obeys all twelve laws before accepting it; your designed shot composes for the layout and the laws, and a generic rewrite does neither.
 
-## Cost preflighting
+## Checking cost and balance (no free preflight on Kling)
 
-Before ANY generation, check the exact price of the exact call you plan with `get_cost: true`. It is free. Tell the user each price in plain words before it moves: the starting frame's price before the frame ("The starting image costs about 2 credits, making it now"), then the video model menu with real prices once the frame is approved, before any video credits move. The cheap step first, the big decision second, every number real.
+Kling has no free per-job price-check call. Every `text_to_image`, `image_to_image`, `text_to_video`, and `image_to_video` call is a real, charged job the moment it is submitted; there is no dry run, and Kling's own guidance is explicit that a job should never be submitted just to see what happens. So the discipline shifts from previewing an exact number to being deliberate before every call:
 
-**The video model is a real choice, and the user makes it.** The connector offers several video models, and the price spread on identical parameters (same duration, same resolution, same mode) has measured about five to one between the top-priced model and a mid-priced one. Both ends are genuinely top tier as of this writing: independent leaderboards rank the proven default at the very top for overall quality and prompt fidelity, and the mid-priced alternative among the best for physics and cinematic motion. So preflight the SAME planned shot across the top two or three video models. Discover the current lineup with the connector's model catalog; `get_cost` is free on every one. Then present the real numbers with the honest tradeoff: the proven default is what these laws were tuned on and buys the highest ceiling; the mid-priced model is legitimate and turns a small or trial balance from one shot into many, which changes the video gate from frightening to a normal creative decision. Their money, their choice, made before anything is spent.
+- Call `query_membership_and_credits` before the first generation of a session, and again after any video job (the expensive step), so the user always knows the real balance and what a job actually cost.
+- Confirm the prompt, model, resolution, and duration out loud before submitting anything uncertain.
+- If the balance is 0 or clearly too low for the plan (this should already have surfaced in Phase 1's scan), stop and tell the user before any creative work starts. Direct them to top up at kling.ai's membership page, or at the link an insufficient-credits error from `query_tasks` returns.
 
-At the proven defaults a hero image costs about 2 credits and a hero video about 54, which is the top of the video range, and a free trial covers roughly one hero pipeline plus one retry, more with a cheaper video model. For a chained journey, preflight the whole chain and present the full total up front, per segment.
+**The video model is a real choice, and the user makes it,** but without a live price comparison the tradeoff is capability, not a real-time price table: `kling-video-v3_0_turbo` is Kling's stated first choice for a single image-to-video shot and is the proven default these laws are tuned around; `kling-video-v3_0` and `kling-video-v3_0_omni` add multi-image input, a `tail_image` target, and Element (subject) consistency, useful for chained or character-driven builds; `kling-video-o1` adds multimodal instruction-following with subject elements; `kling-video-v2_5` and `kling-video-v2_6` are the lower tier, but only support 5 or 10 second durations, not this skill's proven 6-second default. Recommend `kling-video-v3_0_turbo` unless the project needs one of the others' specific capabilities, say why, and let the user choose.
+
+For a chained journey, there is no free total to preflight; instead check the balance before the chain starts, and again after each segment's video gate, so the user always knows what has been spent and what a re-roll of the current segment would leave behind.
