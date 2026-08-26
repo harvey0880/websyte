@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gilbertson Fine Homes · Built to be Inherited</title>
+<meta name="description" content="Custom homes for Vancouver Island and the Gulf Islands, built by hand by a Red Seal carpenter to carry your family's name. Nanaimo, Ladysmith, Saltspring, Gabriola, and remote island sites.">
+<meta name="theme-color" content="#10141a">
+<!-- DEPLOY STEP: patch og:url and og:image with the live absolute URL before zipping -->
+<meta property="og:title" content="Gilbertson Fine Homes · Built to be Inherited">
+<meta property="og:description" content="Custom homes for Vancouver Island and the Gulf Islands, built to carry your family's name.">
+<meta property="og:url" content="https://REPLACE-AT-DEPLOY/">
+<meta property="og:image" content="https://REPLACE-AT-DEPLOY/assets/hero-ending.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2310141a'/%3E%3Cpath d='M7 24V14l9-6 9 6v10' fill='none' stroke='%23c89a5e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 24v-6h8v6' fill='none' stroke='%23c89a5e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
+<style>
+/* ============================= Tokens ============================= */
+:root{
+  --canvas:#10141a;
+  --panel:#1a212b;
+  --mist:#8fa3ad;
+  --accent:#c89a5e;
+  --accent-hover:#dcae6f;
+  --accent-muted:#5c4a30;
+  --text-secondary:#9aa7b2;
+  --text-primary:#f2ede4;
+  --tshadow:0 1px 2px rgba(5,5,10,.95),0 3px 12px rgba(5,5,10,.78),0 10px 44px rgba(5,5,10,.8);
+  --ease-out:cubic-bezier(.22,.9,.24,1);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+  --display:"Fraunces",Georgia,serif;
+  --body:"Newsreader",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip;background:var(--canvas)}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--text-primary);font-size:1.125rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg,video{max-width:100%}
+::selection{background:var(--accent-muted);color:var(--text-primary)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#10141a;padding:.6em 1em;z-index:99;font-family:var(--mono);font-size:.8rem}
+.skip:focus{left:0}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ==================== Fixed background environment ==================== */
+.env{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.env::before,.env::after{content:"";position:absolute;inset:-30%;background:radial-gradient(ellipse 40% 30% at 30% 40%,rgba(143,163,173,.05),transparent 70%)}
+.env::after{background:radial-gradient(ellipse 45% 35% at 70% 65%,rgba(200,154,94,.04),transparent 70%)}
+body.motion-on .env::before{animation:drift1 96s var(--ease-soft) -30s infinite alternate}
+body.motion-on .env::after{animation:drift2 128s var(--ease-soft) -50s infinite alternate}
+@keyframes drift1{from{transform:translate(-3%,-2%)}to{transform:translate(3%,2%)}}
+@keyframes drift2{from{transform:translate(2%,3%)}to{transform:translate(-2%,-3%)}}
+body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
+
+/* ============================= Nav ============================= */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:baseline;justify-content:space-between;padding:1.1rem clamp(1.2rem,4vw,3rem);transition:background .5s var(--ease-soft),box-shadow .5s var(--ease-soft)}
+nav.scrolled{background:rgba(16,20,26,.82);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(143,163,173,.12)}
+.wordmark{font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-primary);text-decoration:none}
+.wordmark small{display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;color:var(--mist);margin-top:.15rem}
+.nav-cta{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--accent-muted);padding:.55em 1.1em;border-radius:2px;transition:background .35s var(--ease-soft),color .35s var(--ease-soft),border-color .35s var(--ease-soft)}
+.nav-cta:hover{background:var(--accent);color:#10141a;border-color:var(--accent)}
+
+/* ============================= Hero ============================= */
+.hero{position:relative;height:1700vh;z-index:1}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.poster{position:absolute;inset:0;background-size:cover;background-position:center}
+#hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s var(--ease-soft);will-change:transform;transform:translateZ(0)}
+.stage.video-ready #hero-video{opacity:1}
+.stage.video-failed #hero-video{display:none}
+.scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,10,18,0) 35%,rgba(10,10,18,.62) 100%)}
+.ring-wrap{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);color:var(--mist);opacity:.85}
+.ring{width:34px;height:34px;transform:rotate(-90deg)}
+.ring circle{transition:stroke-dashoffset .2s linear}
+.stage.video-ready .ring-wrap{opacity:0;transition:opacity .8s var(--ease-soft)}
+.chevron{width:22px;height:22px;border-right:2px solid var(--mist);border-bottom:2px solid var(--mist);transform:rotate(45deg);opacity:.8}
+body.motion-on .chevron{animation:dip 2.6s var(--ease-soft) -1s infinite}
+@keyframes dip{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(4px,4px)}}
+
+/* Caption bands */
+.band{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;pointer-events:none;padding:0 clamp(1.4rem,6vw,6rem);text-shadow:var(--tshadow)}
+.band::before{content:"";position:absolute;inset:-4%;pointer-events:none;opacity:calc(.25 + .75*var(--k,0));background:radial-gradient(ellipse 74% 62% at 28% 50%,rgba(5,5,10,.62) 0%,rgba(5,5,10,.4) 46%,rgba(5,5,10,0) 76%)}
+.band.centered{align-items:center;text-align:center}
+.band.centered::before{background:radial-gradient(ellipse 74% 62% at 50% 50%,rgba(5,5,10,.68) 0%,rgba(5,5,10,.44) 46%,rgba(5,5,10,0) 76%)}
+.band .line{position:relative;max-width:16ch;font-family:var(--display);font-weight:300;font-size:clamp(2rem,5vw,4.2rem);line-height:1.12;letter-spacing:.01em}
+.band.centered .line{max-width:20ch}
+.band .kicker{position:relative;font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;color:var(--mist);text-transform:uppercase;margin-bottom:1.2rem}
+.band .sub{position:relative;font-size:1.05rem;color:var(--text-secondary);max-width:44ch;margin-top:1.4rem}
+.band .cta-row{position:relative;margin-top:2.2rem}
+.band .btn{text-shadow:none}
+.band .em{color:var(--accent)}
+#band-1 .wordmark-big{font-family:var(--display);font-weight:300;font-size:clamp(1.6rem,3.6vw,3rem);letter-spacing:.34em;text-transform:uppercase;color:var(--text-primary)}
+#band-1{align-items:center;text-align:center}
+#band-1::before{background:none}
+
+/* Character and word spans for entrances */
+.w{display:inline-block;white-space:pre}
+.c{display:inline-block;white-space:pre}
+
+/* (a) scatter */
+[data-entrance="scatter"] .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px))) rotate(calc((1 - var(--kc))*var(--jr,0deg)))}
+/* (b) grid snap-align */
+[data-entrance="grid"] .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translateX(calc((1 - var(--kc))*var(--jx,0px)))}
+/* (c) blur-to-sharp: two stacked copies */
+[data-entrance="blur"] .soft{position:absolute;inset:auto auto auto 0;filter:blur(10px);opacity:calc(1 - var(--k,0))}
+[data-entrance="blur"] .sharp{opacity:var(--k,0)}
+/* (d) word punch */
+[data-entrance="punch"] .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);--ks:clamp(0,(var(--k,0) - var(--th,0) - var(--sd,.1))*var(--ss,3.2),1);opacity:var(--kc);transform:scale(calc(0.6 + (0.4 + var(--ov,.12))*var(--kc) - var(--ov,.12)*var(--ks)))}
+[data-entrance="punch"] .w.em{--ov:0.24;--sd:0.16;--ss:2.6}
+/* (e) word rise */
+[data-entrance="rise"] .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*26px))}
+[data-entrance="rise"] .sub{opacity:var(--ks2,0)}
+[data-entrance="rise"] .cta-row{opacity:var(--kb,0);transform:translateY(calc((1 - var(--kb,0))*14px))}
+/* (f) drift down */
+[data-entrance="drift"] .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-24px))}
+/* (i) weave */
+[data-entrance="weave"] .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*var(--jy,0px)))}
+/* halves converge (band 11): halves start pushed outward, slide in */
+[data-entrance="halves"] .half{display:inline-block;--kc:var(--k,0);opacity:var(--kc);transform:translateX(calc((1 - var(--kc))*var(--jx,0px)))}
+
+/* Static hero (five gates), composed still */
+.static-hero{display:none;position:absolute;inset:0;flex-direction:column;justify-content:flex-end;padding:0 clamp(1.4rem,6vw,4rem) 14vh;text-shadow:var(--tshadow);background:linear-gradient(180deg,rgba(10,10,18,0) 30%,rgba(10,10,18,.72) 100%)}
+.static-hero .kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--mist);text-transform:uppercase;margin-bottom:1rem}
+.static-hero h2{font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,8vw,3.6rem);line-height:1.1;max-width:14ch}
+.static-hero p{color:var(--text-secondary);max-width:38ch;margin-top:1rem}
+.static-hero .cta-row{margin-top:1.8rem}
+.static-hero .btn{text-shadow:none}
+
+/* The five gates: identical strings live in the JS GATES array */
+@media (max-width: 720px){.hero{height:100vh;height:100svh}.band,.ring-wrap{display:none}.static-hero{display:flex}}
+@media (orientation: portrait) and (max-width: 1024px){.hero{height:100vh;height:100svh}.band,.ring-wrap{display:none}.static-hero{display:flex}}
+@media (orientation: portrait) and (pointer: coarse){.hero{height:100vh;height:100svh}.band,.ring-wrap{display:none}.static-hero{display:flex}}
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 560px){.hero{height:100vh;height:100svh}.band,.ring-wrap{display:none}.static-hero{display:flex}}
+@media (prefers-reduced-motion: reduce){.hero{height:100vh;height:100svh}.band,.ring-wrap{display:none}.static-hero{display:flex}}
+@media (max-height:560px){.ring-wrap{display:none}}
+
+/* ============================= Buttons ============================= */
+.btn{display:inline-block;font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#10141a;background:var(--accent);border:1px solid var(--accent);padding:.95em 1.9em;border-radius:2px;text-decoration:none;cursor:pointer;transition:background .35s var(--ease-soft),border-color .35s var(--ease-soft),transform .35s var(--ease-out)}
+.btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent);color:#10141a}
+@media (pointer:coarse){.btn,.nav-cta{min-height:44px;display:inline-flex;align-items:center;justify-content:center}}
+
+/* ============================= Sections ============================= */
+main{position:relative;z-index:2;background:linear-gradient(180deg,rgba(16,20,26,0),var(--canvas) 6vh)}
+section{position:relative;padding:clamp(5rem,12vh,9rem) clamp(1.4rem,6vw,6rem);max-width:1200px;margin:0 auto}
+.sheet{font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--mist);display:inline-block;margin-bottom:1.4rem}
+.sheet::after{content:"";display:block;height:1px;background:var(--accent-muted);margin-top:.55rem;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease-out) .2s}
+.in .sheet::after{transform:scaleX(1)}
+h2{font-family:var(--display);font-weight:300;font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.15;max-width:22ch;margin-bottom:1.6rem}
+.lede{color:var(--text-secondary);max-width:58ch;font-size:1.15rem}
+.lede strong{color:var(--text-primary);font-weight:500}
+
+/* Entrances below the fold: parent .rev gets .in from the observer */
+.rev .part{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.rev.in .part{opacity:1;transform:none}
+.rev.in .part:nth-child(2){transition-delay:.1s}
+.rev.in .part:nth-child(3){transition-delay:.2s}
+.rev.in .part:nth-child(4){transition-delay:.3s}
+.rev.in .part:nth-child(5){transition-delay:.4s}
+.rev.in.settled .part:nth-child(2),.rev.in.settled .part:nth-child(3),.rev.in.settled .part:nth-child(4),.rev.in.settled .part:nth-child(5){transition-delay:0s}
+
+/* The survey line, the signature element */
+.survey{position:absolute;top:0;bottom:0;left:clamp(.4rem,2vw,1.6rem);width:60px;pointer-events:none;z-index:0}
+.survey svg{position:absolute;top:0;height:100%;width:60px;overflow:visible}
+.survey path{fill:none;stroke:var(--accent-muted);stroke-width:1.2}
+
+/* Philosophy */
+#philosophy .lede{font-size:1.22rem}
+
+/* Islands */
+.coast-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.coast{width:100%;height:auto}
+.coast .shore{fill:none;stroke:var(--mist);stroke-width:1.1;opacity:.7}
+.coast .pt{fill:var(--accent)}
+.coast text{font-family:var(--mono);font-size:9px;letter-spacing:.16em;fill:var(--text-secondary)}
+body.motion-on .in .coast .shore{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 3.2s var(--ease-out) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (max-width:840px){.coast-wrap{grid-template-columns:1fr}}
+
+/* Process */
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
+.phase{background:var(--panel);border:1px solid rgba(143,163,173,.12);border-radius:3px;padding:1.6rem 1.4rem;position:relative;transition:border-color .6s var(--ease-soft)}
+.phase h3{font-family:var(--display);font-weight:500;font-size:1.25rem;margin-bottom:.7rem}
+.phase p{font-size:.98rem;color:var(--text-secondary)}
+.phase .num{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;color:var(--mist);display:block;margin-bottom:1rem}
+.phase.lit{border-color:var(--accent-muted)}
+.phase.lit .num{color:var(--accent)}
+@media (max-width:960px){.phases{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.phases{grid-template-columns:1fr}}
+
+/* The pour, the one interactive moment */
+.pour-pad{margin-top:1.2rem;border:1px dashed var(--accent-muted);border-radius:3px;padding:1.1rem 1.2rem;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;background:transparent;color:inherit;font:inherit;text-align:left;width:100%}
+.pour-pad .hint{font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+.form-outline{margin-top:.8rem;height:44px;border:1.5px solid var(--mist);border-radius:2px;position:relative;overflow:hidden}
+.form-outline::before{content:"";position:absolute;left:0;right:0;bottom:0;height:calc(var(--pour,0)*100%);background:linear-gradient(180deg,rgba(200,154,94,.5),rgba(200,154,94,.85));transition:none}
+.pour-done .form-outline{border-color:var(--accent)}
+.pour-done .hint{color:var(--accent)}
+
+/* Portfolio boards */
+.boards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3rem}
+.board{aspect-ratio:4/3;background:var(--panel);border:1px solid rgba(143,163,173,.14);border-radius:2px;padding:10px;display:flex}
+.board .mat{flex:1;border:1px solid rgba(143,163,173,.18);display:flex;align-items:center;justify-content:center;padding:1rem;text-align:center}
+.board .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--mist);line-height:2}
+@media (max-width:960px){.boards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.boards{grid-template-columns:1fr}}
+
+/* Trust */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
+.tile{background:var(--panel);border:1px solid rgba(143,163,173,.12);border-radius:3px;padding:1.5rem 1.3rem}
+.tile .big{font-family:var(--display);font-weight:300;font-size:2rem;line-height:1.1}
+.tile .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);margin-top:.7rem;display:block}
+.tile.todo{border-style:dashed;border-color:var(--accent-muted)}
+.tile.todo .big{color:var(--mist)}
+@media (max-width:960px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.6rem}
+.quote{border-left:2px solid var(--accent-muted);padding:.4rem 0 .4rem 1.4rem;font-family:var(--display);font-weight:300;font-size:1.2rem;color:var(--text-secondary);font-style:italic}
+.quote cite{display:block;font-family:var(--mono);font-style:normal;font-size:.64rem;letter-spacing:.2em;color:var(--mist);margin-top:.9rem}
+@media (max-width:840px){.quotes{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{margin-top:3.4rem;max-width:760px}
+.faq h3{font-family:var(--display);font-weight:500;font-size:1.2rem;margin:2rem 0 .6rem}
+.faq p{color:var(--text-secondary)}
+
+/* Conversation */
+#conversation .lede{margin-bottom:2.6rem}
+form{max-width:640px;display:grid;gap:1.3rem}
+.field label{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);margin-bottom:.5rem}
+.field input,.field textarea{width:100%;background:var(--panel);border:1px solid rgba(143,163,173,.2);border-radius:2px;color:var(--text-primary);font:inherit;padding:.85em 1em;transition:border-color .35s var(--ease-soft)}
+.field input:focus-visible,.field textarea:focus-visible{border-color:var(--accent);outline:none}
+.field textarea{min-height:120px;resize:vertical}
+.form-note{font-size:.9rem;color:var(--mist)}
+.success{display:none;border:1px solid var(--accent-muted);border-radius:3px;padding:1.6rem;color:var(--text-secondary)}
+.success.show{display:block}
+form.sent{display:none}
+
+/* Footer */
+footer{position:relative;z-index:2;border-top:1px solid rgba(143,163,173,.12);padding:3rem clamp(1.4rem,6vw,6rem);display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:baseline;color:var(--mist);font-size:.9rem;background:var(--canvas)}
+footer .fm{font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase}
+
+/* ====================== Reduced motion, complete ====================== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
+  .rev .part{opacity:1;transform:none}
+  .sheet::after{transform:scaleX(1)}
+  .coast .shore{stroke-dasharray:none;stroke-dashoffset:0}
+  .form-outline::before{height:100%}
+  .survey path{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body class="motion-on">
+<a class="skip" href="#main">Skip to content</a>
+<div class="env" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="wordmark" href="#top">Gilbertson Fine Homes<small>Vancouver Island · Gulf Islands</small></a>
+  <a class="nav-cta" href="#conversation">Start the conversation</a>
+</nav>
+
+<header class="hero" id="top">
+  <h1 class="vh">Gilbertson Fine Homes. Custom homes built to be inherited, on Vancouver Island and the Gulf Islands.</h1>
+  <div class="stage" id="stage">
+    <!-- Designed dusk scene: the stand-in and the video-failed state -->
+    <svg class="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#141c28"/><stop offset=".55" stop-color="#18222e"/><stop offset="1" stop-color="#10141a"/>
+        </linearGradient>
+        <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c89a5e" stop-opacity=".28"/><stop offset="1" stop-color="#c89a5e" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <path d="M0 430 L240 300 L420 400 L640 250 L860 390 L1080 280 L1320 410 L1600 320 V900 H0 Z" fill="#151d27"/>
+      <path d="M0 560 L300 460 L560 540 L820 440 L1120 560 L1400 480 L1600 540 V900 H0 Z" fill="#121924"/>
+      <rect x="0" y="520" width="1600" height="130" fill="#8fa3ad" opacity=".05"/>
+      <ellipse cx="800" cy="700" rx="420" ry="150" fill="url(#glow)"/>
+      <path d="M690 700 V620 L800 555 L910 620 V700" fill="none" stroke="#c89a5e" stroke-width="3" opacity=".8"/>
+      <path d="M745 700 V648 H855 V700" fill="none" stroke="#c89a5e" stroke-width="3" opacity=".8"/>
+      <path d="M560 700 H1040 M600 700 V660 M640 700 V655 M680 700 V660 M920 700 V660 M960 700 V655 M1000 700 V660" stroke="#5c4a30" stroke-width="2.5" fill="none"/>
+      <rect x="0" y="698" width="1600" height="202" fill="#0d1116"/>
+    </svg>
+    <div class="poster" aria-hidden="true"></div>
+    <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+    <div class="scrim" aria-hidden="true"></div>
+
+    <!-- Caption bands: ranges are starting points, validated by the flick test -->
+    <div class="band" id="band-1" data-a="0.00" data-b="0.07" data-entrance="blur" aria-hidden="true">
+      <div class="line wordmark-big"><span class="soft">Gilbertson Fine Homes</span><span class="sharp">Gilbertson Fine Homes</span></div>
+    </div>
+    <div class="band" id="band-2" data-a="0.09" data-b="0.16" data-entrance="drift">
+      <span class="vh">Some homes are built for the market.</span>
+      <div class="line" aria-hidden="true" data-split="w">Some homes are built for the market.</div>
+    </div>
+    <div class="band" id="band-3" data-a="0.18" data-b="0.25" data-entrance="rise">
+      <span class="vh">This one is built for your name.</span>
+      <div class="line" aria-hidden="true" data-split="w">This one is built for <span class="em">your name.</span></div>
+    </div>
+    <div class="band" id="band-4" data-a="0.27" data-b="0.33" data-entrance="scatter" data-spread="0.4">
+      <span class="vh">It starts with land, and a promise.</span>
+      <div class="line" aria-hidden="true" data-split="c">It starts with land, and a promise.</div>
+    </div>
+    <div class="band" id="band-5" data-a="0.35" data-b="0.41" data-entrance="grid" data-spread="0.5">
+      <span class="vh">We build sensational spaces.</span>
+      <div class="line" aria-hidden="true" data-split="c">We build sensational spaces.</div>
+    </div>
+    <div class="band" id="band-6" data-a="0.43" data-b="0.49" data-entrance="drift">
+      <span class="vh">From concept,</span>
+      <div class="line" aria-hidden="true" data-split="w">From concept,</div>
+    </div>
+    <div class="band" id="band-7" data-a="0.51" data-b="0.58" data-entrance="punch">
+      <span class="vh">to procurement,</span>
+      <div class="line" aria-hidden="true" data-split="w">to <span class="em">procurement,</span></div>
+    </div>
+    <div class="band" id="band-8" data-a="0.60" data-b="0.67" data-entrance="weave" data-spread="0.45">
+      <span class="vh">to building,</span>
+      <div class="line" aria-hidden="true" data-split="c">to building,</div>
+    </div>
+    <div class="band" id="band-9" data-a="0.69" data-b="0.76" data-entrance="blur">
+      <span class="vh">to finishes.</span>
+      <div class="line" aria-hidden="true"><span class="soft">to finishes.</span><span class="sharp">to finishes.</span></div>
+    </div>
+    <div class="band centered" id="band-10" data-a="0.78" data-b="0.86" data-entrance="rise" data-ramp="0.036">
+      <span class="vh">Then we hand you the keys to the rest of your life.</span>
+      <div class="line" aria-hidden="true" data-split="w">Then we hand you the keys to the rest of your life.</div>
+    </div>
+    <div class="band centered" id="band-11" data-a="0.88" data-b="1.00" data-entrance="halves" data-ramp="0.04">
+      <span class="vh">Built to be inherited.</span>
+      <div class="line" aria-hidden="true"><span class="half" style="--jx:-60px">Built to be&nbsp;</span><span class="half" style="--jx:60px">inherited.</span></div>
+      <p class="sub">Custom homes for Vancouver Island and the Gulf Islands, built by hand to carry your family's name.</p>
+      <div class="cta-row"><a class="btn" href="#conversation">Start the conversation</a></div>
+    </div>
+
+    <!-- The composed static hero for the five gates -->
+    <div class="static-hero">
+      <p class="kicker">Nanaimo · Ladysmith · The Gulf Islands</p>
+      <h2>Built to be inherited.</h2>
+      <p>Custom homes for Vancouver Island and the Gulf Islands, built by hand to carry your family's name.</p>
+      <div class="cta-row"><a class="btn" href="#conversation">Start the conversation</a></div>
+    </div>
+
+    <div class="ring-wrap" id="ring-wrap" aria-hidden="true">
+      <svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <div class="survey" aria-hidden="true">
+    <svg id="survey-svg" viewBox="0 0 60 4000" preserveAspectRatio="none">
+      <path id="survey-path" d="M30 0 C 20 200, 44 380, 28 560 S 14 900, 34 1100 S 48 1500, 26 1700 S 12 2100, 36 2300 S 46 2700, 24 2900 S 16 3300, 32 3500 C 40 3650, 20 3760, 30 3860 L 30 3900 L 18 3900 L 18 3960 M30 3900 L 42 3900 L 42 3960"/>
+    </svg>
+  </div>
+
+  <section id="philosophy" class="rev">
+    <p class="sheet part">A-101 · The Builder</p>
+    <h2 class="part">A home your grandchildren will argue over.</h2>
+    <p class="lede part">Gilbertson Fine Homes is led by a <strong>Red Seal carpenter</strong> who still swings a hammer on his own sites. We build a small number of homes each year on Vancouver Island and the Gulf Islands, and we build them to be argued over in fifty years, not flipped in five. Clear communication, transparent pricing, and a build you can watch happen. That is the whole trick.</p>
+  </section>
+
+  <section id="islands" class="rev">
+    <p class="sheet part">L-301 · Site Plan</p>
+    <h2 class="part">We build where the ferries go, and where they don't.</h2>
+    <div class="coast-wrap">
+      <p class="lede part">Nanaimo. Ladysmith. Central Vancouver Island. And the outer islands most builders won't quote: <strong>Saltspring, Gabriola</strong>, and remote sites where every board arrives by barge. Island building is its own trade, and it is ours.</p>
+      <!-- Stylized coastline, drawn by hand, not a survey document -->
+      <svg class="coast part" viewBox="0 0 400 300" role="img" aria-label="Stylized map of central Vancouver Island and the Gulf Islands, marking Nanaimo, Ladysmith, Gabriola, and Saltspring">
+        <path class="shore" d="M60 10 C 40 60, 70 90, 55 130 C 42 168, 75 190, 62 230 C 52 262, 80 285, 70 295"/>
+        <path class="shore" d="M95 40 C 85 80, 110 100, 100 140 C 92 175, 118 200, 108 240 C 100 268, 122 288, 115 296"/>
+        <path class="shore" d="M180 120 C 168 132, 172 150, 186 158 C 200 166, 214 156, 210 142 C 206 128, 190 112, 180 120 Z"/>
+        <path class="shore" d="M230 200 C 214 216, 222 242, 242 250 C 262 258, 282 244, 276 224 C 270 204, 246 186, 230 200 Z"/>
+        <circle class="pt" cx="128" cy="130" r="4"/><text x="140" y="127">NANAIMO</text>
+        <circle class="pt" cx="118" cy="196" r="4"/><text x="130" y="193">LADYSMITH</text>
+        <circle class="pt" cx="196" cy="140" r="4"/><text x="208" y="168">GABRIOLA</text>
+        <circle class="pt" cx="252" cy="226" r="4"/><text x="264" y="223">SALTSPRING</text>
+      </svg>
+    </div>
+  </section>
+
+  <section id="process" class="rev">
+    <p class="sheet part">S-201 · Sequence of Work</p>
+    <h2 class="part">Concept. Procurement. Building. Finishes.</h2>
+    <div class="phases">
+      <div class="phase" data-phase="1">
+        <span class="num">PHASE 01</span>
+        <h3>Concept</h3>
+        <p>We design around your land and your life, and we price honestly before anyone digs. Allowances are spelled out, not hidden.</p>
+        <button class="pour-pad" id="pour" type="button" aria-label="Press and hold to pour the foundation. Completing it highlights the four phases in order.">
+          <span class="hint" id="pour-hint">Press and hold to pour the foundation</span>
+          <span class="form-outline" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="phase" data-phase="2">
+        <span class="num">PHASE 02</span>
+        <h3>Procurement</h3>
+        <p>We source every board, pane, and fixture ourselves, so quality and price never have to be a choice.</p>
+      </div>
+      <div class="phase" data-phase="3">
+        <span class="num">PHASE 03</span>
+        <h3>Building</h3>
+        <p>Permits handled. Schedule visible. A Red Seal carpenter on your site, not just a signature on your contract.</p>
+      </div>
+      <div class="phase" data-phase="4">
+        <span class="num">PHASE 04</span>
+        <h3>Finishes</h3>
+        <p>The stair rail your hand will know in the dark. Nice things cost. They don't need to cost twice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="rev">
+    <p class="sheet part">A-401 · Selected Work</p>
+    <h2 class="part">Homes we'd put our own name on. And did.</h2>
+    <div class="boards">
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+      <div class="board part"><div class="mat"><span class="tag">[ YOUR PROJECT PHOTO ]<br>TITLE · ISLAND</span></div></div>
+    </div>
+  </section>
+
+  <section id="interiors" class="rev">
+    <p class="sheet part">I-501 · Interiors</p>
+    <h2 class="part">Finished means finished.</h2>
+    <p class="lede part">Deep energy retrofits, <strong>Built Green and Net Zero</strong> training, and interiors finished to the last cabinet pull. If you want one contract from raw land to made beds, that is exactly what we do.</p>
+  </section>
+
+  <section id="trust" class="rev">
+    <p class="sheet part">T-601 · Record</p>
+    <h2 class="part">The receipts.</h2>
+    <div class="tiles">
+      <div class="tile todo part"><span class="big">[ YEARS ]</span><span class="lbl">TO FILL: years building on the island</span></div>
+      <div class="tile todo part"><span class="big">[ N ]</span><span class="lbl">TO FILL: homes standing</span></div>
+      <div class="tile part"><span class="big">Red Seal</span><span class="lbl">Certified carpentry</span></div>
+      <div class="tile part"><span class="big">Net Zero</span><span class="lbl">Built Green · Net Zero trained</span></div>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote part">"[ TO FILL: real client words, used with permission ]"<cite>[ CLIENT NAME · ISLAND ]</cite></blockquote>
+      <blockquote class="quote part">"[ TO FILL: real client words, used with permission ]"<cite>[ CLIENT NAME · ISLAND ]</cite></blockquote>
+    </div>
+    <div class="faq">
+      <h3>Will we blow the budget?</h3>
+      <p>The horror stories start with vague allowances. Ours are itemized before you sign, and change orders are priced before the work, not after.</p>
+      <h3>How do you handle the cheapest bid?</h3>
+      <p>We won't win a race to the lowest number, and we won't bill you for what a low bid left out. The cheapest quote is usually the most expensive home.</p>
+      <h3>Can you actually build on the outer islands?</h3>
+      <p>Yes. Barge schedules, remote crews, island permitting: we plan them from day one, and we've done it before.</p>
+      <h3>Who handles the permits?</h3>
+      <p>We do. All of them. You'll never stand in a municipal line.</p>
+    </div>
+  </section>
+
+  <section id="conversation" class="rev">
+    <p class="sheet part">C-701 · First Meeting</p>
+    <h2 class="part">Tell us about your land. Or your idea of it.</h2>
+    <p class="lede part">One conversation. No obligation, no pressure, and no junior salesperson. You'll talk to the people who will actually build your home.</p>
+    <form id="contact-form" novalidate>
+      <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-land">Where is (or where should be) your land?</label><input id="f-land" name="land" type="text"></div>
+      <div class="field"><label for="f-idea">Tell us what you're imagining</label><textarea id="f-idea" name="idea"></textarea></div>
+      <div><button class="btn" type="submit">Start the conversation</button></div>
+      <p class="form-note">TODO before launch: wire this form to the business's real intake email or a form service. Right now it shows a confirmation only.</p>
+    </form>
+    <div class="success" id="form-success" role="status">Thank you. We read every one of these ourselves, and we'll reply within two business days.</div>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <span class="wordmark" style="font-size:.95rem">Gilbertson Fine Homes</span>
+    <p class="fm" style="margin-top:.6rem">Nanaimo · Ladysmith · Saltspring · Gabriola · Central Vancouver Island</p>
+  </div>
+  <p class="fm">[ TO FILL: phone · email · address ]</p>
+</footer>
+
+<script>
+"use strict";
+/* ============ Utilities ============ */
+const clamp=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+const smoothstep=(p,e0,e1)=>{const t=clamp((p-e0)/(e1-e0),0,1);return t*t*(3-2*t)};
+function rng(seed){let s=seed>>>0;return()=>(s=(s*1664525+1013904223)>>>0)/4294967296}
+
+/* ============ Elements ============ */
+const stage=document.getElementById('stage');
+const video=document.getElementById('hero-video');
+const hero=document.querySelector('.hero');
+const nav=document.getElementById('nav');
+const ringWrap=document.getElementById('ring-wrap');
+const ringCircle=ringWrap.querySelector('circle');
+
+/* ============ Split headlines once at load (seeded) ============ */
+(function split(){
+  const r=rng(20260825);
+  document.querySelectorAll('[data-split]').forEach(el=>{
+    const mode=el.getAttribute('data-split');
+    const spread=parseFloat(el.closest('.band').getAttribute('data-spread')||'0.5');
+    const frag=document.createDocumentFragment();
+    const walk=node=>{
+      if(node.nodeType===3){
+        const words=node.textContent.split(/(\s+)/);
+        words.forEach(word=>{
+          if(!word)return;
+          if(/^\s+$/.test(word)){frag.appendChild(document.createTextNode(word));return}
+          const w=document.createElement('span');w.className='w';
+          if(mode==='c'){
+            [...word].forEach(ch=>{const c=document.createElement('span');c.className='c';c.textContent=ch;w.appendChild(c)});
+          }else{w.textContent=word}
+          frag.appendChild(w);
+        });
+      }else if(node.nodeType===1){
+        const w=document.createElement('span');w.className='w '+(node.className||'');
+        if(mode==='c'){[...node.textContent].forEach(ch=>{const c=document.createElement('span');c.className='c';c.textContent=ch;w.appendChild(c)})}
+        else{w.textContent=node.textContent}
+        frag.appendChild(w);
+      }
+    };
+    [...el.childNodes].forEach(walk);
+    el.textContent='';el.appendChild(frag);
+    const band=el.closest('.band');
+    const ent=band.getAttribute('data-entrance');
+    const words=[...el.querySelectorAll('.w')];
+    words.forEach((w,i)=>{w.style.setProperty('--th',(i/Math.max(1,words.length)*0.4+r()*0.06).toFixed(3))});
+    const chars=[...el.querySelectorAll('.c')];
+    chars.forEach((c,i)=>{
+      if(ent==='scatter'){c.style.setProperty('--th',(r()*0.55).toFixed(3));c.style.setProperty('--jx',((r()*2-1)*46).toFixed(1)+'px');c.style.setProperty('--jy',((r()*2-1)*34).toFixed(1)+'px');c.style.setProperty('--jr',((r()*2-1)*14).toFixed(1)+'deg')}
+      else if(ent==='grid'){c.style.setProperty('--th',(i/Math.max(1,chars.length)*spread+r()*0.06).toFixed(3));c.style.setProperty('--jx',(30+r()*30).toFixed(1)+'px')}
+      else if(ent==='weave'){c.style.setProperty('--th',(i/Math.max(1,chars.length)*spread+r()*0.05).toFixed(3));c.style.setProperty('--jy',((i%2?1:-1)*(20+r()*16)).toFixed(1)+'px')}
+    });
+  });
+})();
+
+/* ============ Bands ============ */
+const bands=[...document.querySelectorAll('.band')].map(el=>({
+  el,
+  a:parseFloat(el.getAttribute('data-a')),
+  b:parseFloat(el.getAttribute('data-b')),
+  ramp:parseFloat(el.getAttribute('data-ramp')||'0')||null,
+  first:el.id==='band-1',
+  last:el.id==='band-11',
+  op:-1,k:-1
+}));
+
+let loadK=0; /* band one's one-time load ramp */
+function updateCaptions(p){
+  for(const b of bands){
+    const f=Math.min(0.02,(b.b-b.a)/3);
+    let op=(b.first?1:smoothstep(p,b.a,b.a+f))*(b.last?1:(1-smoothstep(p,b.b-f,b.b)));
+    if(!b.first)op*= (p<b.a-0.001?0:1);
+    if(b.first&&p>b.b)op=1-smoothstep(p,b.b-f,b.b);
+    if(b.last)op=smoothstep(p,b.a,b.a+f);
+    const rampLen=b.ramp||Math.min(0.025,(b.b-b.a)*0.35);
+    let k=clamp((p-b.a)/rampLen,0,1);
+    if(b.first)k=Math.max(k,loadK);
+    if(Math.abs(op-b.op)>0.008){b.op=op;b.el.style.opacity=op.toFixed(3)}
+    if(Math.abs(k-b.k)>0.008){b.k=k;b.el.style.setProperty('--k',k.toFixed(3));
+      if(b.el.getAttribute('data-entrance')==='rise'&&b.el.classList.contains('centered')){
+        b.el.style.setProperty('--ks2',clamp((k-0.66)*4,0,1).toFixed(3));
+        b.el.style.setProperty('--kb',clamp((k-0.78)*5,0,1).toFixed(3));
+      }
+      if(b.last){
+        b.el.style.setProperty('--ks2',clamp((k-0.6)*4,0,1).toFixed(3));
+        b.el.style.setProperty('--kb',clamp((k-0.75)*5,0,1).toFixed(3));
+      }
+    }
+  }
+}
+/* band 11 sub and CTA ride --ks2/--kb */
+const b11=document.getElementById('band-11');
+b11.querySelector('.sub').style.cssText='opacity:var(--ks2,0)';
+b11.querySelector('.cta-row').style.cssText='opacity:var(--kb,0);transform:translateY(calc((1 - var(--kb,0))*14px))';
+
+/* ============ Scroll drive: lerp that rests ============ */
+let target=0,shown=0,rafId=null,lastTick=0,heroOnScreen=true;
+function heroProgress(){
+  const rect=hero.getBoundingClientRect();
+  const total=hero.offsetHeight-innerHeight;
+  return total>0?clamp(-rect.top/total,0,1):0;
+}
+function tick(now){
+  const dt=Math.min(100,now-(lastTick||now));lastTick=now;
+  const k=0.16;
+  shown+=(target-shown)*(1-Math.pow(1-k,dt/16.667));
+  if(Math.abs(target-shown)<0.0005){shown=target;rafId=null;lastTick=0}
+  else{rafId=requestAnimationFrame(tick)}
+  if(video.duration)requestSeek(shown*video.duration);
+  updateCaptions(shown);
+}
+function onScroll(){
+  target=heroProgress();
+  if(rafId===null&&heroOnScreen)rafId=requestAnimationFrame(tick);
+}
+new IntersectionObserver(es=>{heroOnScreen=es[0].isIntersecting},{threshold:0}).observe(hero);
+
+/* ============ Gated seeks (deadlock-safe) ============ */
+let seekBusy=false,pendingTime=null;
+function requestSeek(t){
+  if(!video.duration)return;
+  if(seekBusy){pendingTime=t;return}
+  seekBusy=true;video.currentTime=t;
+}
+video.addEventListener('seeked',()=>{seekBusy=false;if(pendingTime!==null){const t=pendingTime;pendingTime=null;requestSeek(t)}});
+video.addEventListener('error',()=>{seekBusy=false;pendingTime=null;failVideo()});
+
+/* ============ Streamed Blob loader with the honest ring ============ */
+const VIDEO_URL='assets/hero-scrub.mp4';
+const VIDEO_BYTES=14000000; /* TODO: hardcode the real byte size after the film is encoded */
+let heroInit=false,blobStarted=false;
+function initHeroOnce(){
+  if(heroInit)return;heroInit=true;
+  const posterLayer=document.querySelector('.poster');
+  posterLayer.style.backgroundImage="url('assets/hero-poster.jpg')";
+  const img=new Image();
+  img.onload=startBlobFetch;img.onerror=startBlobFetch;
+  img.src='assets/hero-poster.jpg';
+  setTimeout(startBlobFetch,4000);
+}
+function startBlobFetch(){
+  if(blobStarted)return;blobStarted=true;
+  loadHeroBlob().catch(failVideo);
+}
+async function loadHeroBlob(){
+  const ctrl=new AbortController();
+  let watchdog=setTimeout(()=>ctrl.abort(),20000);
+  const res=await fetch(VIDEO_URL,{priority:'low',signal:ctrl.signal});
+  if(!res.ok)throw new Error('video fetch '+res.status);
+  const total=Number(res.headers.get('Content-Length'))||VIDEO_BYTES;
+  const reader=res.body.getReader();
+  const chunks=[];let got=0,lastRing=0;
+  for(;;){
+    const{done,value}=await reader.read();
+    if(done)break;
+    clearTimeout(watchdog);watchdog=setTimeout(()=>ctrl.abort(),20000);
+    chunks.push(value);got+=value.length;
+    const frac=Math.min(1,got/total);
+    const now=performance.now();
+    if(now-lastRing>100||frac===1){lastRing=now;ringCircle.style.strokeDashoffset=Math.round(126*(1-frac))}
+  }
+  clearTimeout(watchdog);
+  ringCircle.style.strokeDashoffset=0;
+  video.src=URL.createObjectURL(new Blob(chunks,{type:'video/mp4'}));
+  video.load();
+  video.addEventListener('canplay',()=>{
+    requestSeek(heroProgress()*video.duration);
+    stage.classList.add('video-ready');
+  },{once:true});
+}
+function failVideo(){
+  const chev=document.createElement('div');chev.className='chevron';
+  ringWrap.replaceChildren(chev);
+  stage.classList.add('video-failed');
+}
+
+/* ============ The five gates, armed live ============ */
+const GATES=[
+  '(max-width: 720px)',
+  '(orientation: portrait) and (max-width: 1024px)',
+  '(orientation: portrait) and (pointer: coarse)',
+  '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
+  '(prefers-reduced-motion: reduce)'
+];
+let scrubOn=false;
+function enableScrub(){
+  if(scrubOn)return;scrubOn=true;
+  initHeroOnce();
+  addEventListener('scroll',onScroll,{passive:true});
+  bands.forEach(b=>{b.op=-1;b.k=-1});
+  unpinFinalStates();
+  updateCaptions(heroProgress());
+  onScroll();
+}
+function disableScrub(){
+  if(!scrubOn)return;scrubOn=false;
+  removeEventListener('scroll',onScroll);
+  if(rafId!==null){cancelAnimationFrame(rafId);rafId=null}
+}
+function applyHeroMode(){
+  if(GATES.some(q=>matchMedia(q).matches))disableScrub();
+  else enableScrub();
+}
+const MQLS=GATES.map(q=>matchMedia(q));
+MQLS.forEach(m=>m.addEventListener('change',applyHeroMode));
+
+/* ============ Reduced motion, live, both directions ============ */
+let pinned=false;
+function pinToFinalStates(){
+  pinned=true;
+  document.body.classList.remove('motion-on');
+  document.getElementById('pour').closest('.phase').classList.add('lit');
+  document.querySelectorAll('.phase').forEach(ph=>ph.classList.add('lit'));
+  document.getElementById('process').classList.add('pour-done');
+  document.querySelector('.pour-pad .form-outline').parentElement.style.setProperty('--pour',1);
+  surveySet(1);
+  document.querySelectorAll('.rev').forEach(s=>s.classList.add('in','settled'));
+}
+function unpinFinalStates(){
+  if(!pinned)return;pinned=false;
+  document.body.classList.add('motion-on');
+  if(!pourComplete){
+    document.querySelectorAll('.phase').forEach(ph=>ph.classList.remove('lit'));
+    document.getElementById('process').classList.remove('pour-done');
+    document.querySelector('.pour-pad').style.setProperty('--pour',0);
+  }
+}
+matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>{
+  if(e.matches)pinToFinalStates();
+  else applyHeroMode();
+});
+
+/* ============ Band one load ramp ============ */
+(function loadRamp(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const t0=performance.now();
+  const step=now=>{
+    loadK=smoothstep((now-t0)/1600,0,1);
+    updateCaptions(shown);
+    if(loadK<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+})();
+
+/* ============ Nav state (delta-gated) ============ */
+let navScrolled=false;
+addEventListener('scroll',()=>{
+  const want=scrollY>40;
+  if(want!==navScrolled){navScrolled=want;nav.classList.toggle('scrolled',want)}
+},{passive:true});
+
+/* ============ Section entrances + stagger retirement ============ */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      setTimeout(()=>e.target.classList.add('settled'),1600);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.18});
+document.querySelectorAll('.rev').forEach(s=>io.observe(s));
+
+/* ============ The survey line, drawn by scroll ============ */
+const surveyPath=document.getElementById('survey-path');
+const surveyLen=surveyPath.getTotalLength();
+surveyPath.style.strokeDasharray=surveyLen;
+surveyPath.style.strokeDashoffset=surveyLen;
+let lastSurvey=-1;
+function surveySet(f){
+  const v=Math.round(surveyLen*(1-f));
+  if(v!==lastSurvey){lastSurvey=v;surveyPath.style.strokeDashoffset=v}
+}
+let surveyRaf=null;
+addEventListener('scroll',()=>{
+  if(surveyRaf)return;
+  surveyRaf=requestAnimationFrame(()=>{
+    surveyRaf=null;
+    if(pinned)return;
+    const main=document.getElementById('main');
+    const r=main.getBoundingClientRect();
+    const f=clamp((innerHeight-r.top)/(r.height+innerHeight*0.5),0,1);
+    surveySet(f);
+  });
+},{passive:true});
+
+/* ============ The pour (press and hold) ============ */
+const pour=document.getElementById('pour');
+const pourHint=document.getElementById('pour-hint');
+let pourP=0,pourDir=0,pourRaf=null,pourComplete=false;
+function pourStep(){
+  pourRaf=null;
+  pourP=clamp(pourP+pourDir*0.016,0,1);
+  pour.style.setProperty('--pour',pourP.toFixed(3));
+  if(pourP>=1&&!pourComplete){completePour();return}
+  if((pourDir>0&&pourP<1)||(pourDir<0&&pourP>0))pourRaf=requestAnimationFrame(pourStep);
+}
+function completePour(){
+  pourComplete=true;pourDir=0;
+  document.getElementById('process').classList.add('pour-done');
+  pourHint.textContent='Foundation poured. The rest follows.';
+  document.querySelectorAll('.phase').forEach((ph,i)=>{
+    setTimeout(()=>ph.classList.add('lit'),i*260);
+  });
+}
+function pourStart(e){
+  if(pourComplete)return;
+  e.preventDefault();pourDir=1;
+  if(!pourRaf)pourRaf=requestAnimationFrame(pourStep);
+}
+function pourEnd(){
+  if(pourComplete)return;
+  pourDir=-1;
+  if(!pourRaf)pourRaf=requestAnimationFrame(pourStep);
+}
+pour.addEventListener('pointerdown',pourStart);
+addEventListener('pointerup',pourEnd);
+pour.addEventListener('pointercancel',pourEnd);
+pour.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)pourStart(e)});
+pour.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')pourEnd()});
+
+/* ============ Form: JS-only success state (see TODO note) ============ */
+document.getElementById('contact-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  e.target.classList.add('sent');
+  document.getElementById('form-success').classList.add('show');
+});
+
+/* ============ Pause everything on hidden tabs ============ */
+document.addEventListener('visibilitychange',()=>{
+  document.body.classList.toggle('paused',document.hidden);
+});
+
+/* ============ Boot ============ */
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)pinToFinalStates();
+applyHeroMode();
+</script>
+</body>
+</html>
