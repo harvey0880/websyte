@@ -39,19 +39,19 @@ Sampled from the storyboard's world: dusk over BC coastal mountains, mist, cedar
 
 Loaded from Google Fonts, trimmed to exactly these weights, with preconnect.
 
-## 4. The film: storyboard and segments
+## 4. The film: one master take, eight hard cuts
 
-Three segments, 15 seconds each, generated on **kling-video-v3_0** (multi-shot on, no audio, 15 seconds, 16:9), each chained by extracting the previous segment's final frame as the next segment's start image. Joined with the single-encode concat into one 45-second scrub film. Three segments instead of two so every one of the brief's 14 beats gets its own window, none doubled up. Seam 1 lands inside the blueprint dissolve (a full texture refresh); seam 2 lands inside the golden-hour light shift as the pull-back begins, which motivates the texture refresh the seam law requires.
+One 15-second generation on **kling-video-v3_0** (multi-shot ON, prompt written as an explicit hard-cut shot list, no audio, 1080p, 16:9), driven by the approved start frame. Hard cuts and timelapse replace continuous camera travel: each shot is a held composition doing exactly one job, and the scrub gives each its own band, so no screen time is spent flying over empty ground. One take means no chaining, no frame extraction between segments, no seams.
 
-Generation path, decided with the owner: the owner generates each step in their own Kling web account from the exact prompt and settings handed to them, and returns the original downloaded file in chat. Claude extracts each chaining frame as a lossless PNG. Same engine, same prompts, so same quality; the standing rules are original files only (no re-compressed transfers) and a watermark check on the first output.
+Generation path, decided with the owner: generated from this session through the Kling connector; the owner reviews and downloads each output from the returned no-watermark URL (the session's own network policy blocks the CDN, so the owner's download is the archival copy). Standing rules: original files only, and a watermark check on the first output.
 
 The generator never sees any text. The faint logo reveal in the clouds and every caption are HTML/SVG overlays on the page, crisp and brand-accurate, never baked into footage.
 
 Law-driven adjustments to the brief, said out loud:
-- All people are distant figures or warm silhouettes seen through glass (Law 5: anatomy at detail breaks; silhouettes at distance render beautifully). The dinner gathering reads as amber warmth and human shapes, not close faces.
+- All people are small, distant, fast-moving crew figures (Law 5: anatomy at detail breaks; silhouettes at distance render beautifully). The dinner-party and children beats from the earlier plan are cut by the owner's revised brief.
 - The two vehicles are dark, sculptural, and unbranded (no-logos guard; real marques are trademarks).
 - The logo-in-clouds beat is a page overlay timed to band 1, not generated imagery (Law 12).
-- Contingency, decided now: if the kids-and-vehicles beat fails inspection twice, the yard resolves as landscaping, fountain, and closing gate alone. The story survives; the anatomy risk does not have to.
+- Contingency, decided now: if the driveway-and-cars beat fails inspection twice, the close resolves as gate and mist alone. The story survives; the risk does not have to.
 
 ### The world, locked (art direction from the owner's reference film)
 
@@ -61,40 +61,20 @@ Every prompt below describes the same place and the same house, so the film read
 - **The house:** a grand modern-barn estate: a long row of steep-pitched gables stepping across the clearing, the central gable a full two-storey wall of black-steel-framed glass with a cascading glass-orb chandelier visible inside, flanking wings in dark stained timber, heavy stone chimneys, charcoal standing-seam roofs, a broad stone terrace and a dark still reflecting pool across the front.
 - **The grade:** cool Pacific Northwest light throughout: silver, diffuse, desaturated greens and slate blues, mist always alive in frame. Warmth enters only as interior amber through glass and the golden-hour/blue-hour close. Never oversaturated, never golden-fantasy.
 
-### Segment 1, "The Vision" (0 to 15s)
+### The cut (owner's second-by-second brief, mapped to footage time)
 
-| Time | Beat | Camera and world |
+| Shot | Footage window | Beat |
 |---|---|---|
-| 0-3s | Clouds | Inside a luminous drifting cloud layer, soft morning light, slow descent begins |
-| 3-6s | The island | Cloud breaks: aerial view of BC coastal mountains, fir forest, inlets, morning mist in the valleys |
-| 6-9s | The vision | Continued descent to a top-down view of a glass-roofed modern-classic home, glass catching the light, reading as a vision more than a finished thing |
-| 9-12s | Raw land | Camera tilts and drops toward eye level: the land is actually raw and cleared, a single walking trail, survey stakes; the house hangs as a translucent apparition over the site |
-| 12-15s | The blueprint | The apparition dissolves into glowing white blueprint line-art of itself, clean drawn lines standing over the raw land; ends at eye level, still drifting gently forward |
+| 1 | 0.0-2.0s | Straight down through thinning cloud, the estate's charcoal gable roofs dead-centre far below, growing fast as the camera drops |
+| 2 | 2.0-4.0s | Directly over the central glass gable roof: through the glass, a gorgeous warm interior, chandelier, staircase, marble floor |
+| 3 | 4.0-5.5s | HARD CUT to eye level across the reflecting pool, the finished estate front-on beneath the cliff |
+| 4 | 5.5-7.5s | The house turns to glowing white architectural line-art; day snaps to night in timelapse and the outline fades, leaving bare excavated earth and an open foundation |
+| 5 | 7.5-9.5s | Night works timelapse: excavators and a concrete pump over the foundation, work lights, small crew figures in fast motion |
+| 6 | 9.5-11.5s | Dawn timelapse: the timber frame stands, steep gable trusses stepping across the site, framers moving fast along it |
+| 7 | 11.5-13.0s | The frame skins over into the finished house; through the glass, rich woodwork and marble floors catching warm light |
+| 8 | 13.0-15.0s | Eye-level pull back: paved driveway with two dark luxury cars in the foreground, a heavy estate gate closes across frame, mist rolls in, house glowing beyond; rest on the closed gate |
 
-Final frame (becomes segment 2's start): eye-level view of the glowing white blueprint line-art house standing on the raw cleared land, mountains behind, late-morning light. Extracted as full-quality PNG.
-
-### Segment 2, "The Build" (15 to 30s)
-
-| Time | Beat | Camera and world |
-|---|---|---|
-| 0-3s | Foundation | The blueprint lines settle onto the ground and become real: timber formwork and a freshly poured concrete foundation, mid-day, crisp shadows |
-| 3-7s | Night works | Daylight slides to dusk then night: work lights cut through blue dark, an excavator, a concrete pump mid-pour, steam and dust drifting through the beams, small distant crew figures in hard hats |
-| 7-11s | The frame rises | Time-lapse: timber framing climbs out of the foundation, framers as small figures on the structure, first light returning |
-| 11-15s | The house | The skeleton resolves into the finished home at golden hour: wood, stone, warm metal, stairs and finishes visible through the glass; rests a beat on the finished house |
-
-Final frame (becomes segment 3's start): eye-level view of the finished house glowing at golden hour, mountains behind. Extracted as full-quality PNG.
-
-### Segment 3, "The Life and the Legacy" (30 to 45s)
-
-| Time | Beat | Camera and world |
-|---|---|---|
-| 0-3s | The life inside | Golden hour deepens toward blue hour; a slow pull back begins: amber interior glow, a couple and their friends gathered at a long dinner table seen through the tall glass as warm silhouettes, in a warmly classic interior: wood paneling, a marble floor, elegant traditional furniture, a grand staircase beyond |
-| 3-6s | The door | The massive tall front door swings closed as the pull back continues |
-| 6-9s | The yard | The landscaped front yard reveals itself: sculptural fountain centerpiece with moving water, two dark unbranded vehicles, small distant figures of children playing on the lawn |
-| 9-12s | The retreat | The landscaping recedes into the periphery as the camera keeps drawing back down the driveway |
-| 12-15s | The gate | A heavy estate gate closes across the frame and the shot rests on the sealed gate, home glowing beyond, blue hour |
-
-Final frame (the page's settle): the closed gate centered with generous margin above and below, house warm behind it. Header-safe by design; verified with the header mocked over it before approval.
+Final frame (the page's settle, the poster, the static hero): the closed gate in mist, house warm behind it. Header-safe by design; verified with the header mocked over it before approval.
 
 ### The generation prompts (written now, submitted only after the gates)
 
@@ -102,48 +82,35 @@ Final frame (the page's settle): the closed gate centered with generous margin a
 
 > High-altitude aerial photograph looking down through a thin breaking layer of morning cloud over a British Columbia mountain valley. Through the widening break on the left of frame, far below: a sheer granite cliff face with vertical rock striations rising out of dense dark-green fir forest, a flat meadow valley floor in muted sage and straw tones, and ribbons of low mist lying through the treetops. The right side of frame stays a soft unbroken field of cool white-grey cloud. Overcast Pacific Northwest light: silver, diffuse, slightly cold, one faint warm touch of early sun on the cliff top. Shot from a drone on a full-frame cinema camera, deep depth of field, razor-sharp detail in rock striations and individual fir crowns, subtle natural film grain, graded like a moody architectural documentary: desaturated greens, slate blues, no oversaturation, no fantasy glow. 16:9. No text, no logos, no lettering anywhere.
 
-**Segment 1 video prompt (image to video, kling-video-v3_0, start image = approved start frame):**
+**Master film prompt (image to video, kling-video-v3_0, 15s, multi-shot on, no audio, 1080p, start image = approved start frame):**
 
-> One continuous shot, no cuts. A slow steady drone descent through a thin breaking morning cloud layer into a British Columbia mountain valley: a soft beat of mist crosses the lens, then the world sharpens below, a sheer granite cliff face with vertical striations above dense dark fir forest, a flat sage-and-straw meadow floor, ribbons of low mist through the treetops, cool silver overcast light. The camera keeps descending toward a single cleared homesite at the forest edge where a grand modern-barn estate appears seen from directly above: a long row of steep charcoal gable roofs, dark timber wings, stone chimneys, a dark reflecting pool tracing the front terrace, soft light glancing off a central glass roofline. As the camera keeps sinking and tilts toward eye level it reveals that the front land is actually raw and cleared, bare earth with one narrow walking trail and survey stakes, and the estate now reads as a translucent architectural vision hanging over the site, and the vision dissolves into glowing white blueprint line-art of the same gabled estate, clean drawn lines standing in the air over the raw land beneath the granite cliff. The scene stays alive throughout: drifting mist, moving cloud shadows, trembling fir tops. The shot ends at eye level, still drifting gently forward, the glowing white line-art house on the raw land, cliff and firs behind, cool late-morning light, desaturated documentary grade. No text or lettering anywhere.
-
-**Segment 2 video prompt (image to video, kling-video-v3_0, start image = segment 1's extracted final frame):**
-
-> One continuous shot, no cuts, continuing the same slow forward drift over the same homesite. The glowing white blueprint lines of the house settle down onto the ground and become real: timber formwork and a freshly poured concrete foundation in crisp mid-day light. Daylight then slides into dusk and night: work lights snap on and cut through the blue dark, an excavator and a concrete pump working over the foundation with small distant crew figures in hard hats, steam and dust drifting through the beams of light. Time flows forward in a smooth time-lapse: timber framing climbs up out of the foundation into a long row of steep gable trusses stepping across the site beneath the granite cliff, small figures of framers moving along the structure as first light returns, and the timber skeleton resolves into the grand finished modern-barn estate at golden hour: steep charcoal gable roofs, dark stained timber, stone chimneys, the central two-storey glass gable glowing, a cascading glass-orb chandelier and an elegant staircase visible through the black-steel-framed glass, the dark reflecting pool catching the light along the front terrace. The scene stays alive throughout: moving lights, drifting dust, a shifting sky. The shot ends resting a beat at eye level on the finished house glowing in golden-hour light, mountains behind. No text or lettering anywhere.
-
-**Segment 3 video prompt (image to video, kling-video-v3_0, start image = segment 2's extracted final frame):**
-
-> One continuous shot, no cuts, beginning on the same grand modern-barn estate at golden hour and easing into a slow steady pull back as golden hour deepens toward blue hour, the granite cliff dimming behind the gable roofline. Warm amber light fills the interior where a couple and their friends sit gathered at a long dinner table seen through the central two-storey glass gable beneath the cascading glass-orb chandelier, rendered as warm silhouettes in a warmly classic interior with rich wood paneling, a gleaming marble floor, elegant traditional furniture, and a grand staircase visible beyond them. As the camera pulls back, a massive tall front door swings closed. The pull back continues to reveal the landscaped front yard: a sculptural stone fountain centerpiece with moving water, two dark elegant unbranded luxury vehicles in the driveway, and small distant figures of children playing on the lawn in the evening light. The camera keeps drawing back down the driveway until a heavy estate gate closes across the frame. The shot ends at rest at blue hour: the closed gate centered in frame with generous sky above and driveway below, the finished home glowing warmly beyond it, everything settled and still except drifting mist and the fountain's water. No text or lettering anywhere.
+> A cinematic architectural film cut as a rapid sequence of distinct shots with hard cuts and timelapse, not one continuous camera move. Shot 1: looking straight down through a thinning morning cloud layer, a grand modern-barn estate directly below, a long row of steep charcoal gable roofs, stone chimneys and a dark reflecting pool, growing closer as the camera drops fast through the mist. Shot 2: directly above the central glass gable roof, looking through the glass into a gorgeous warm interior: a cascading glass-orb chandelier, a grand staircase, gleaming marble floor, amber light. Hard cut, Shot 3: eye level across the dark reflecting pool, the finished estate front-on, dark timber and black-steel glass beneath a sheer granite cliff, cool silver light. Shot 4: the whole house turns into glowing white architectural blueprint line-art; day snaps to night in fast timelapse and the line-art fades away, leaving bare excavated earth and an open foundation on the same site. Shot 5: night construction timelapse, excavators and a concrete pump truck working fast over the foundation under blazing work lights, small crew figures in hard hats moving in fast motion, steam and dust drifting through the beams. Shot 6: dawn timelapse, a timber frame rises, steep gable roof trusses stepping across the site, framers moving fast along the structure. Shot 7: the timber skeleton skins over into the finished estate, and through the tall glass rich warm woodwork and marble floors catch golden light. Shot 8: eye-level pull back at blue hour, a paved stone driveway with two dark elegant unbranded luxury cars in the foreground, a heavy iron estate gate swings closed across the frame, low mist rolls in, the house glowing warm beyond the gate; the film ends at rest on the closed gate in the mist. The same house, the same valley, the same granite cliff in every shot. Cool desaturated documentary grade throughout, warmth only from interior light and the blue-hour close. No text or lettering anywhere.
 
 ## 5. The band map
 
-45 seconds of joined footage carries a **2400vh** hero (starting point; the skill's proven density is about 400vh per 6s shot). Sticky full-viewport stage, scroll progress 0 to 1 drives video time through the Blob + lerp + gated-seek standard. Ranges are starting points for the flick test.
+15 seconds of hard-cut footage carries a **1100vh** hero (starting point; the skill's proven density is about 400vh per 6s shot). Sticky full-viewport stage, scroll progress 0 to 1 drives video time through the Blob + lerp + gated-seek standard. Ranges are starting points for the flick test; the cut boundaries in the footage are the band boundaries, so every scroll lands inside one held composition.
 
-Text lives left-aligned in the left third of frame (the film's action reads center-right through most beats); bands 10 and 11 sit centered as the film symmetrizes on the door and gate.
+Text lives left-aligned in the left third of frame; band 8 sits centered as the film symmetrizes on the gate.
 
 | Band | Range | Footage moment | Copy (verbatim) | Entrance |
 |---|---|---|---|---|
-| 1 | 0.00-0.06 | Inside the clouds | GILBERTSON FINE HOMES (wordmark, faint, dissolving) | Blur-to-sharp at whisper opacity, one-time load ramp |
-| 2 | 0.08-0.13 | Mountains revealed | "Some homes are built for the market." | Drift-down |
-| 3 | 0.15-0.20 | Glass roof from above | "This one is built for your name." | Word-by-word rise |
-| 4 | 0.22-0.27 | Raw land, trail, stakes | "It starts with land, and a promise." | Scatter, tight spread |
-| 5 | 0.29-0.34 | Blueprint line-art | "We build sensational spaces." | Grid snap-align (drafting-table echo) |
-| 6 | 0.36-0.42 | Foundation poured | "From concept," | Drift-down |
-| 7 | 0.44-0.50 | Night works, pour | "to procurement," | Word-punch on "procurement" |
-| 8 | 0.52-0.58 | Framing rises | "to building," | Weave (threads-crossing echo of framing) |
-| 9 | 0.60-0.66 | Finished house, golden hour | "to finishes." | Blur-to-sharp |
-| 10 | 0.69-0.79 | Amber gathering, door closes | "Then we hand you the keys to the rest of your life." | Word-by-word rise into staged settle |
-| 11 | 0.84-1.00 | Gate closes, rest | "Built to be inherited." + CTA "Start the conversation" | Halves parting in reverse (converging as the gate closes), then staged settle: line, subline, CTA |
+| 1 | 0.00-0.10 | Falling through cloud to the roofs | GILBERTSON FINE HOMES (wordmark, faint, dissolving) | Blur-to-sharp at whisper opacity, one-time load ramp |
+| 2 | 0.13-0.24 | The interior through the glass roof | "Some homes are built for the market." | Drift-down |
+| 3 | 0.27-0.35 | Eye level across the pool | "This one is built for your name." | Word-by-word rise |
+| 4 | 0.37-0.48 | Line-art, night falls, site goes bare | "We build sensational spaces." | Grid snap-align (drafting-table echo) |
+| 5 | 0.50-0.61 | Night works over the foundation | "From concept, to procurement," | Word-punch on "procurement" |
+| 6 | 0.63-0.74 | The frame rises at dawn | "to building," | Weave (threads-crossing echo of framing) |
+| 7 | 0.76-0.84 | Finished: woodwork and marble | "to finishes." | Blur-to-sharp |
+| 8 | 0.87-1.00 | Cars, the gate closes, mist | "We build to inherit." + CTA "Start the conversation" | Halves converging as the gate closes, then staged settle: line, subline, CTA |
 
-Bands 5 through 9 are one continuous sentence written across the scroll; their shared left rail and identical baseline make them read as one utterance, and the punctuation carries the continuation.
-
-Band 11's plateau is the longest on the page (the final 16 percent of a 2400vh hero is about 380vh): "Built to be inherited" gets room to land, never clipped.
+Bands 5 through 7 read as one continued sentence across the scroll; the shared left rail and identical baseline carry it. Band 8's plateau is the longest on the page (the final 13 percent of an 1100vh hero): "We build to inherit." gets room to land, never clipped.
 
 ## 6. The static-hero copy block
 
 For phones, portrait tablets, coarse-pointer landscape, short landscape, and reduced motion (the five gates): the settle frame (closed gate, glowing home) as a composed still with:
 
 - Kicker (mono): `NANAIMO · LADYSMITH · THE GULF ISLANDS`
-- Headline: "Built to be inherited."
+- Headline: "We build to inherit."
 - Subline: "Custom homes for Vancouver Island and the Gulf Islands, built by hand to carry your family's name."
 - CTA: "Start the conversation"
 
@@ -220,10 +187,10 @@ In S-201, phase 1's card carries it: **press and hold to pour the foundation.** 
 
 ## 10. The engineering list
 
-The full standard, named so the build cannot half-remember it: streamed Blob fetch with the honest loading ring (45s of 720p footage will clear 8 MB), dt-normalized lerp that rests, gated seeks with the deadlock escape, delta-gated DOM writes, band pacing with the flick test, the four-layer legibility system with the worst-frame audit at 3.5:1, the five static-hero gates identical in CSS and JS and armed live, complete-without-video, `overflow-x: clip` on both roots, reduced motion honored live in both directions, and the quality floor, all per `scrub-pipeline.md`. Mobile decision, made now: the five gates serve the composed static settle frame; no mobile scrub (a 45-second chained film will not fit the under-8MB cover-crop bar).
+The full standard, named so the build cannot half-remember it: streamed Blob fetch with the honest loading ring (a 15-second film encoded at 720p lands well under 8 MB), dt-normalized lerp that rests, gated seeks with the deadlock escape, delta-gated DOM writes, band pacing with the flick test, the four-layer legibility system with the worst-frame audit at 3.5:1, the five static-hero gates identical in CSS and JS and armed live, complete-without-video, `overflow-x: clip` on both roots, reduced motion honored live in both directions, and the quality floor, all per `scrub-pipeline.md`. Mobile decision, made now: the five gates serve the composed static settle frame; mobile scrub revisited at build now that the film is 15 seconds; the under-8MB cover-crop bar decides it.
 
 Performance bar from the brief, adopted: page usable almost instantly, poster first, film streaming behind the ring; page weight excluding video in the tens of KB; measured receipts at deploy.
 
 ## 11. The copy gate line
 
-Every viewer-facing line above ships verbatim. The built page must pass the Phase 9 grep gate (zero em dashes; zero hits on leverage, seamless, empower, unlock, robust, actionable, data-driven, solutions) plus the body-copy sweep for AI tells before anyone sees it. Deliberate brand devices in this package are craft and stay: the four-word phase march ("Concept. Procurement. Building. Finishes."), the market/name pair in bands 2 and 3, the staccato "Finished means finished." The sweep hunts only what drifts in uninvited.
+Every viewer-facing line above ships verbatim. The built page must pass the Phase 9 grep gate (zero em dashes; zero hits on leverage, seamless, empower, unlock, robust, actionable, data-driven, solutions) plus the body-copy sweep for AI tells before anyone sees it. Deliberate brand devices in this package are craft and stay: the four-word phase march ("Concept. Procurement. Building. Finishes."), the market/name pair in bands 2 and 3, the staccato "Finished means finished.", the owner's gate line "We build to inherit." The sweep hunts only what drifts in uninvited.
